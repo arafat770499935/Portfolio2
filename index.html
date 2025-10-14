@@ -7,31 +7,54 @@
   <style>
     body {
       margin: 0;
-      font-family: "Cairo", sans-serif;
-      background-color: #fdf8ff;
+      font-family: "Tahoma", sans-serif;
+      background-color: #fff;
       scroll-behavior: smooth;
     }
 
+    /* رأس الصفحة */
     header {
-      background: linear-gradient(90deg, #800080, #b84db8);
+      background-color: #800080;
       color: white;
       padding: 15px;
       text-align: center;
       font-size: 22px;
       font-weight: bold;
-      letter-spacing: 1px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
     }
 
-    /* النص المتحرك */
+    /* الشريط العلوي الثابت */
+    nav {
+      position: sticky;
+      top: 0;
+      background: #f8f0fa;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      padding: 10px 0;
+      z-index: 999;
+      border-bottom: 2px solid #800080;
+    }
+    nav a {
+      text-decoration: none;
+      color: #800080;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      color: #d633ff;
+      text-decoration: underline;
+    }
+
+    /* الشريط المتحرك */
     .marquee {
-      background: #f1d4fa;
+      background: #f3d6f8;
       color: #800080;
       padding: 8px;
       font-weight: bold;
       white-space: nowrap;
       overflow: hidden;
-      box-shadow: inset 0 0 8px rgba(128,0,128,0.2);
+      font-size: 16px;
     }
     .marquee span {
       display: inline-block;
@@ -47,23 +70,22 @@
     .slider {
       position: relative;
       max-width: 100%;
-      height: 270px;
+      height: 250px;
       overflow: hidden;
       margin: 15px auto;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
     .slides {
       display: flex;
       width: 300%;
       height: 100%;
-      animation: slide 15s infinite;
+      animation: slide 12s infinite;
     }
     .slides img {
       width: 100%;
-      height: 270px;
+      height: 250px;
       object-fit: cover;
-      filter: brightness(90%);
     }
     @keyframes slide {
       0% { transform: translateX(0%); }
@@ -74,59 +96,40 @@
 
     /* الأقسام */
     .section {
-      padding: 25px;
-      animation: fadeIn 1s ease forwards;
+      padding: 20px;
     }
     .section h2 {
       color: #800080;
-      border-bottom: 3px solid #b84db8;
-      padding-bottom: 8px;
+      border-bottom: 2px solid #800080;
+      padding-bottom: 5px;
       text-align: center;
-      font-size: 20px;
-      margin-bottom: 15px;
     }
-
-    /* المنتجات */
     .products {
       display: flex;
       gap: 15px;
       overflow-x: auto;
       padding: 10px;
-      scroll-snap-type: x mandatory;
-    }
-    .products::-webkit-scrollbar {
-      height: 6px;
-    }
-    .products::-webkit-scrollbar-thumb {
-      background-color: #b84db8;
-      border-radius: 10px;
+      scroll-behavior: smooth;
     }
     .product {
       flex: 0 0 auto;
       width: 180px;
-      border-radius: 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
       overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       background: white;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-      scroll-snap-align: center;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.8s ease forwards;
+      transition: transform 0.3s;
     }
-    .product:nth-child(2) { animation-delay: 0.2s; }
-    .product:nth-child(3) { animation-delay: 0.4s; }
-
+    .product:hover {
+      transform: scale(1.05);
+    }
     .product img {
       width: 100%;
       height: 200px;
       object-fit: cover;
-      cursor: pointer;
-      transition: transform 0.3s, filter 0.3s;
-    }
-    .product img:hover {
-      transform: scale(1.05);
-      filter: brightness(1.05);
+      cursor: zoom-in;
+      transition: transform 0.2s ease;
     }
     .product p {
       text-align: center;
@@ -139,51 +142,20 @@
     .popup {
       display: none;
       position: fixed;
-      z-index: 999;
-      left: 0;
       top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.85);
+      background: rgba(0,0,0,0.8);
       justify-content: center;
       align-items: center;
-      flex-direction: column;
+      z-index: 1000;
     }
     .popup img {
-      width: 85%;
-      max-width: 600px;
-      border-radius: 12px;
-      box-shadow: 0 0 25px rgba(255,255,255,0.3);
-      animation: zoomIn 0.3s ease;
-    }
-    .close-btn {
-      position: absolute;
-      top: 25px;
-      right: 35px;
-      background: #fff;
-      color: #800080;
-      border: none;
-      font-size: 25px;
-      font-weight: bold;
-      border-radius: 50%;
-      width: 35px;
-      height: 35px;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(255,255,255,0.3);
-      transition: 0.3s;
-    }
-    .close-btn:hover {
-      background: #800080;
-      color: white;
-    }
-
-    @keyframes zoomIn {
-      from { transform: scale(0.7); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
+      width: 90%;
+      max-width: 400px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
     /* زر واتساب */
@@ -191,152 +163,108 @@
       position: fixed;
       bottom: 20px;
       left: 20px;
-      background: linear-gradient(90deg, #25d366, #1ebe5c);
+      background: #25d366;
       color: white;
-      padding: 14px 20px;
+      padding: 12px 18px;
       border-radius: 50px;
       text-decoration: none;
       font-size: 16px;
       font-weight: bold;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       transition: 0.3s;
+      z-index: 999;
     }
     .whatsapp-button:hover {
-      transform: scale(1.08);
+      background: #1ebe5c;
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
 
-  <header>🪡 محل الأرجوانية للخياطة النسائية 🎀</header>
+  <header id="home">✨ محل الأرجوانية للخياطة النسائية ✨</header>
 
-  <!-- النص المتحرك -->
+  <!-- شريط التنقل -->
+  <nav>
+    <a href="#home">الرئيسية</a>
+    <a href="#women">فساتين نسائية</a>
+    <a href="#girls">فساتين بناتي</a>
+    <a href="#jalabiyas">جلابيات</a>
+    <a href="https://wa.me/967780428855?text=مرحبا%20اريد%20تفاصيل%20عن%20المنتج" target="_blank">تواصل معنا</a>
+  </nav>
+
   <div class="marquee"><span>📍 موقعنا: شارع العدين - نسعد بزيارتكن 🌸</span></div>
+
   <!-- السلايدر -->
   <div class="slider">
     <div class="slides">
-     
-    <img src="file:///storage/emulated/0/alorjwaniya-tailoring/slide1.jpg" alt="عرض 1">
-      <img src="file:///storage/emulated/0/alorjwaniya-tailoring/slide2.jpg" alt="عرض 2">
-      <img src="file:///storage/emulated/0/alorjwaniya-tailoring/slide3.jpg" alt="عرض 3">
+      <img src="images/slide1.jpg" alt="">
+      <img src="images/slide2.jpg" alt="">
+      <img src="images/slide3.jpg" alt="">
     </div>
   </div>
 
   <!-- قسم فساتين نسائية -->
- 
-  <div class="section">
-  <h2>فساتين نسائية</h2>
-  <div class="products">
-  
-  <!-- تكرار الصور من 1 إلى 30 -->
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress1.jpg" alt="فستان نسائي 1" onclick="showPopup(this.src)"><p>فستان نسائي 1</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress2.jpg" alt="فستان نسائي 2" onclick="showPopup(this.src)"><p>فستان نسائي 2</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress3.jpg" alt="فستان نسائي 3" onclick="showPopup(this.src)"><p>فستان نسائي 3</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress4.jpg" alt="فستان نسائي 4" onclick="showPopup(this.src)"><p>فستان نسائي 4</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress5.jpg" alt="فستان نسائي 5" onclick="showPopup(this.src)"><p>فستان نسائي 5</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress6.jpg" alt="فستان نسائي 6" onclick="showPopup(this.src)"><p>فستان نسائي 6</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress7.jpg" alt="فستان نسائي 7" onclick="showPopup(this.src)"><p>فستان نسائي 7</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress8.jpg" alt="فستان نسائي 8" onclick="showPopup(this.src)"><p>فستان نسائي 8</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress9.jpg" alt="فستان نسائي 9" onclick="showPopup(this.src)"><p>فستان نسائي 9</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress10.jpg" alt="فستان نسائي 10" onclick="showPopup(this.src)"><p>فستان نسائي 10</p></div>
-  
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress11.jpg" alt="فستان نسائي 11" onclick="showPopup(this.src)"><p>فستان نسائي 11</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress12.jpg" alt="فستان نسائي 12" onclick="showPopup(this.src)"><p>فستان نسائي 12</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress13.jpg" alt="فستان نسائي 13" onclick="showPopup(this.src)"><p>فستان نسائي 13</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress14.jpg" alt="فستان نسائي 14" onclick="showPopup(this.src)"><p>فستان نسائي 14</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress15.jpg" alt="فستان نسائي 15" onclick="showPopup(this.src)"><p>فستان نسائي 15</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress16.jpg" alt="فستان نسائي 16" onclick="showPopup(this.src)"><p>فستان نسائي 16</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress17.jpg" alt="فستان نسائي 17" onclick="showPopup(this.src)"><p>فستان نسائي 17</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress18.jpg" alt="فستان نسائي 18" onclick="showPopup(this.src)"><p>فستان نسائي 18</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress19.jpg" alt="فستان نسائي 19" onclick="showPopup(this.src)"><p>فستان نسائي 19</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress20.jpg" alt="فستان نسائي 20" onclick="showPopup(this.src)"><p>فستان نسائي 20</p></div>
-  
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress21.jpg" alt="فستان نسائي 21" onclick="showPopup(this.src)"><p>فستان نسائي 21</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress22.jpg" alt="فستان نسائي 22" onclick="showPopup(this.src)"><p>فستان نسائي 22</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress23.jpg" alt="فستان نسائي 23" onclick="showPopup(this.src)"><p>فستان نسائي 23</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress24.jpg" alt="فستان نسائي 24" onclick="showPopup(this.src)"><p>فستان نسائي 24</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress25.jpg" alt="فستان نسائي 25" onclick="showPopup(this.src)"><p>فستان نسائي 25</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress26.jpg" alt="فستان نسائي 26" onclick="showPopup(this.src)"><p>فستان نسائي 26</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress27.jpg" alt="فستان نسائي 27" onclick="showPopup(this.src)"><p>فستان نسائي 27</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress28.jpg" alt="فستان نسائي 28" onclick="showPopup(this.src)"><p>فستان نسائي 28</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress29.jpg" alt="فستان نسائي 29" onclick="showPopup(this.src)"><p>فستان نسائي 29</p></div>
-  <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/dress30.jpg" alt="فستان نسائي 30" onclick="showPopup(this.src)"><p>فستان نسائي 30</p></div>
-  
+  <div class="section" id="women">
+    <h2>💜 فساتين نسائية</h2>
+    <div class="products" id="women-dresses"></div>
   </div>
-  </div>
-     
-    
 
   <!-- قسم فساتين بناتي -->
-  <div class="section">
-    <h2>فساتين بناتي</h2>
-    <div class="products">
-      <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls1.jpg" alt="فستان بناتي 1" onclick="showPopup(this.src)"><p>فستان بناتي 1</p></div>
-      <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls2.jpg" alt="فستان بناتي 2" onclick="showPopup(this.src)"><p>فستان بناتي 2</p></div>
-      <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls3.jpg" alt="فستان بناتي 3" onclick="showPopup(this.src)"><p>فستان بناتي 3</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls4.jpg" alt="فستان بناتي 4" onclick="showPopup(this.src)"><p>فستان بناتي 1</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls5.jpg" alt="فستان بناتي 5" onclick="showPopup(this.src)"><p>فستان بناتي 2</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls6.jpg" alt="فستان بناتي 6" onclick="showPopup(this.src)"><p>فستان بناتي 3</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls7.jpg" alt="فستان بناتي 7" onclick="showPopup(this.src)"><p>فستان بناتي 1</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls8.jpg" alt="فستان بناتي 8" onclick="showPopup(this.src)"><p>فستان بناتي 2</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls9.jpg" alt="فستان بناتي 9" onclick="showPopup(this.src)"><p>فستان بناتي 3</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls10.jpg" alt="فستان بناتي 10" onclick="showPopup(this.src)"><p>فستان بناتي 1</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls11.jpg" alt="فستان بناتي 11" onclick="showPopup(this.src)"><p>فستان بناتي 2</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls12.jpg" alt="فستان بناتي 12" onclick="showPopup(this.src)"><p>فستان بناتي 3</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls1.jpg" alt="فستان بناتي 13" onclick="showPopup(this.src)"><p>فستان بناتي 1</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls2.jpg" alt="فستان بناتي 14" onclick="showPopup(this.src)"><p>فستان بناتي 2</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls3.jpg" alt="فستان بناتي 15" onclick="showPopup(this.src)"><p>فستان بناتي 3</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls4.jpg" alt="فستان بناتي 16" onclick="showPopup(this.src)"><p>فستان بناتي 1</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls5.jpg" alt="فستان بناتي 17" onclick="showPopup(this.src)"><p>فستان بناتي 2</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls6.jpg" alt="فستان بناتي 18" onclick="showPopup(this.src)"><p>فستان بناتي 3</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls7.jpg" alt="فستان بناتي 19" onclick="showPopup(this.src)"><p>فستان بناتي 1</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls8.jpg" alt="فستان بناتي 20" onclick="showPopup(this.src)"><p>فستان بناتي 2</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls9.jpg" alt="فستان بناتي 21" onclick="showPopup(this.src)"><p>فستان بناتي 3</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls10.jpg" alt="فستان بناتي 22" onclick="showPopup(this.src)"><p>فستان بناتي 1</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls11.jpg" alt="فستان بناتي 23" onclick="showPopup(this.src)"><p>فستان بناتي 2</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls12.jpg" alt="فستان بناتي 24" onclick="showPopup(this.src)"><p>فستان بناتي 3</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls1.jpg" alt="فستان بناتي 25" onclick="showPopup(this.src)"><p>فستان بناتي 1</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls2.jpg" alt="فستان بناتي 26" onclick="showPopup(this.src)"><p>فستان بناتي 2</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls3.jpg" alt="فستان بناتي 27" onclick="showPopup(this.src)"><p>فستان بناتي 3</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls4.jpg" alt="فستان بناتي 28" onclick="showPopup(this.src)"><p>فستان بناتي 1</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls5.jpg" alt="فستان بناتي 29" onclick="showPopup(this.src)"><p>فستان بناتي 2</p></div>
-    <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/girls6.jpg" alt="فستان بناتي 30" onclick="showPopup(this.src)"><p>فستان بناتي 3</p></div>
-    
-    
-    </div>
+  <div class="section" id="girls">
+    <h2>🌸 فساتين بناتي</h2>
+    <div class="products" id="girls-dresses"></div>
   </div>
 
   <!-- قسم جلابيات -->
-  <div class="section">
-    <h2>جلابيات</h2>
+  <div class="section" id="jalabiyas">
+    <h2>💠 جلابيات</h2>
     <div class="products">
-      <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/jalabiya1.jpg" alt="جلابية 1" onclick="showPopup(this.src)"><p>جلابية 1</p></div>
-      <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/jalabiya2.jpg" alt="جلابية 2" onclick="showPopup(this.src)"><p>جلابية 2</p></div>
-      <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/jalabiya3.jpg" alt="جلابية 3" onclick="showPopup(this.src)"><p>جلابية 3</p></div>
-      <div class="product"><img src="file:///storage/emulated/0/alorjwaniya-tailoring/jalabiya4.jpg" alt="جلابية 4" onclick="showPopup(this.src)"><p>جلابية 4</p></div>
-    
+      <div class="product"><img src="images/jalabiya1.jpg" onclick="showPopup(this.src)"><p>جلابية 1</p></div>
+      <div class="product"><img src="images/jalabiya2.jpg" onclick="showPopup(this.src)"><p>جلابية 2</p></div>
     </div>
   </div>
 
-  <!-- نافذة التكبير -->
-  <div class="popup" id="popup">
-    <button class="close-btn" onclick="hidePopup()">×</button>
-    <img id="popupImg" src="">
+  <!-- نافذة تكبير -->
+  <div class="popup" id="popup" onclick="hidePopup()">
+    <img id="popup-img" src="" alt="">
   </div>
 
   <!-- زر واتساب -->
-  <a href="https://wa.me/967780428855?text=مرحبا%20اريد%20تفاصيل%20عن%20منتجاتكم" target="_blank" class="whatsapp-button">
-    💬 تواصلي معنا عبر واتساب
-  </a>
+  <a href="https://wa.me/967780428855?text=مرحبا%20اريد%20تفاصيل%20عن%20المنتج" target="_blank" class="whatsapp-button">💬 تواصل عبر واتساب</a>
 
   <script>
-    function showPopup(src) {
-      document.getElementById("popupImg").src = src;
-      document.getElementById("popup").style.display = "flex";
+    // تحميل تلقائي لفساتين نسائية
+    const womenContainer = document.getElementById( women-dresses );
+    for (let i = 1; i <= 30; i++) {
+      const div = document.createElement( div );
+      div.classList.add( product );
+      div.innerHTML = `
+        <img src="images/dress${i}.jpg" alt="فستان نسائي ${i}" onclick="showPopup(this.src)">
+        <p>فستان نسائي ${i}</p>
+      `;
+      womenContainer.appendChild(div);
     }
 
+    // تحميل تلقائي لفساتين بناتي
+    const girlsContainer = document.getElementById( girls-dresses );
+    for (let i = 1; i <= 30; i++) {
+      const div = document.createElement( div );
+      div.classList.add( product );
+      div.innerHTML = `
+        <img src="images/girls${i}.jpg" alt="فستان بناتي ${i}" onclick="showPopup(this.src)">
+        <p>فستان بناتي ${i}</p>
+      `;
+      girlsContainer.appendChild(div);
+    }
+
+    // تكبير الصورة
+    function showPopup(src) {
+      document.getElementById( popup-img ).src = src;
+      document.getElementById( popup ).style.display =  flex ;
+    }
     function hidePopup() {
-      document.getElementById("popup").style.display = "none";
+      document.getElementById( popup ).style.display =  none ;
     }
   </script>
 
