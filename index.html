@@ -12,7 +12,6 @@
       scroll-behavior: smooth;
     }
 
-    /* رأس الصفحة */
     header {
       background-color: #800080;
       color: white;
@@ -23,7 +22,6 @@
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
     }
 
-    /* الشريط العلوي الثابت */
     nav {
       position: sticky;
       top: 0;
@@ -46,7 +44,6 @@
       text-decoration: underline;
     }
 
-    /* الشريط المتحرك */
     .marquee {
       background: #f3d6f8;
       color: #800080;
@@ -66,7 +63,6 @@
       100% { transform: translateX(-100%); }
     }
 
-    /* السلايدر */
     .slider {
       position: relative;
       max-width: 100%;
@@ -94,7 +90,6 @@
       100% { transform: translateX(0%); }
     }
 
-    /* الأقسام */
     .section {
       padding: 20px;
     }
@@ -129,7 +124,6 @@
       height: 200px;
       object-fit: cover;
       cursor: zoom-in;
-      transition: transform 0.2s ease;
     }
     .product p {
       text-align: center;
@@ -138,7 +132,6 @@
       color: #333;
     }
 
-    /* نافذة التكبير */
     .popup {
       display: none;
       position: fixed;
@@ -155,10 +148,8 @@
       width: 90%;
       max-width: 400px;
       border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
-    /* زر واتساب */
     .whatsapp-button {
       position: fixed;
       bottom: 20px;
@@ -184,17 +175,16 @@
 
   <header id="home">🎀 محل الأرجوانية للخياطة النسائية 🪡</header>
 
-  <!-- شريط التنقل -->
   <nav>
     <a href="#home">الرئيسية</a>
-    <a href="#women">فساتين نسائية</a>
+    <a href="#dress">فساتين نسائية</a>
     <a href="#girls">فساتين بناتي</a>
     <a href="#jalabiyas">جلابيات</a>
     <a href="https://wa.me/967780428855?text=مرحبا%20اريد%20تفاصيل%20عن%20المنتج" target="_blank">تواصل معنا</a>
   </nav>
+  
   <div class="marquee"><span>📍 موقعنا: شارع العدين -طلعة سوق النمر-امام مزايا للتخفيضات- نسعد بزيارتكن 🌸</span></div>
 
-  <!-- السلايدر -->
   <div class="slider">
     <div class="slides">
       <img src="images/slide1.jpg" alt="">
@@ -204,15 +194,15 @@
   </div>
 
   <!-- قسم فساتين نسائية -->
-  <div class="section" id="women">
+  <div class="section" id="dress">
     <h2>💜 فساتين نسائية</h2>
-    <div class="products" id="women-dresses"></div>
+    <div class="products" id="dress-container"></div>
   </div>
 
   <!-- قسم فساتين بناتي -->
   <div class="section" id="girls">
     <h2>🌸 فساتين بناتي</h2>
-    <div class="products" id="girls-dresses"></div>
+    <div class="products" id="girls-container"></div>
   </div>
 
   <!-- قسم جلابيات -->
@@ -221,36 +211,39 @@
     <div class="products">
       <div class="product"><img src="images/jalabiya1.jpg" onclick="showPopup(this.src)"><p>جلابية 1</p></div>
       <div class="product"><img src="images/jalabiya2.jpg" onclick="showPopup(this.src)"><p>جلابية 2</p></div>
+      <div class="product"><img src="images/jalabiya3.jpg" onclick="showPopup(this.src)"><p>جلابية 3</p></div>
+     <div class="product"><img src="images/jalabiya4.jpg" onclick="showPopup(this.src)"><p>جلابية 4</p></div>
+ 
     </div>
   </div>
-<p>إشراف م/ عرفات الجلال</p>
-<a href="https://wa.me/967770499935?text=السلام%عليكم%مهندس%◄❉►" target="_blank">770499935</a>
-  <!-- نافذة تكبير -->
+
+  <p>إشراف م/ عرفات الجلال</p>
+  <a href="https://wa.me/967770499935?text=السلام%عليكم%مهندس%◄❉►" target="_blank">770499935</a>
+
   <div class="popup" id="popup" onclick="hidePopup()">
     <img id="popup-img" src="" alt="">
   </div>
 
-  <!-- زر واتساب -->
   <a href="https://wa.me/967780428855?text=مرحبا%20اريد%20تفاصيل%20عن%20المنتج" target="_blank" class="whatsapp-button">💬 تواصل عبر واتساب</a>
 
   <script>
-    // تحميل تلقائي لفساتين نسائية
-    const womenContainer = document.getElementById( women-dresses );
+    // تحميل تلقائي لفساتين نسائية - الكود المصحح
+    const dressContainer = document.getElementById("dress-container");
     for (let i = 1; i <= 30; i++) {
-      const div = document.createElement( div );
-      div.classList.add( product );
+      const div = document.createElement("div");
+      div.className = "product";
       div.innerHTML = `
         <img src="images/dress${i}.jpg" alt="فستان نسائي ${i}" onclick="showPopup(this.src)">
         <p>فستان نسائي ${i}</p>
       `;
-      womenContainer.appendChild(div);
+      dressContainer.appendChild(div);
     }
 
-    // تحميل تلقائي لفساتين بناتي
-    const girlsContainer = document.getElementById( girls-dresses );
+    // تحميل تلقائي لفساتين بناتي - الكود المصحح
+    const girlsContainer = document.getElementById("girls-container");
     for (let i = 1; i <= 30; i++) {
-      const div = document.createElement( div );
-      div.classList.add( product );
+      const div = document.createElement("div");
+      div.className = "product";
       div.innerHTML = `
         <img src="images/girls${i}.jpg" alt="فستان بناتي ${i}" onclick="showPopup(this.src)">
         <p>فستان بناتي ${i}</p>
@@ -260,11 +253,12 @@
 
     // تكبير الصورة
     function showPopup(src) {
-      document.getElementById( popup-img ).src = src;
-      document.getElementById( popup ).style.display =  flex ;
+      document.getElementById("popup-img").src = src;
+      document.getElementById("popup").style.display = "flex";
     }
+    
     function hidePopup() {
-      document.getElementById( popup ).style.display =  none ;
+      document.getElementById("popup").style.display = "none";
     }
   </script>
 
